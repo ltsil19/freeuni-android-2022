@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MessagingApp</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="unregistered">Not registered?</string>
+    <string name="what_i_do">What I do</string>
+    <string name="enter_your_nickname">Enter your nickname</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="sign_in">SIGN IN</string>
 </resources>
