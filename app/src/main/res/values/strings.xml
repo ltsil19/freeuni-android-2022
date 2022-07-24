@@ -11,4 +11,9 @@
     <string name="under_construction">under construction...</string>
     <string name="sign_out">SIGN OUT</string>
     <string name="update">Update</string>
+    <string name="username_placeholder">username placeholder</string>
+    <string name="message_placeholder">message placeholder</string>
+    <string name="time_placeholder">time placeholder</string>
+    <string name="search">search</string>
+    <string name="add_demo_conversation">add demo conversation</string>
 </resources>

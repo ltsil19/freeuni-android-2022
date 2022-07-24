@@ -5,7 +5,9 @@ import a.kentchuashvili.messagingapp.R
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -21,6 +24,7 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.time.LocalDateTime
 
 
 class SettingsFragment : Fragment() {
@@ -30,12 +34,14 @@ class SettingsFragment : Fragment() {
     lateinit var profession: EditText
     lateinit var updateButton: Button
     lateinit var signOutButton: Button
+    lateinit var testConversations: Button
     lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,12 +51,14 @@ class SettingsFragment : Fragment() {
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun init(view: View) {
         profilePicture = view.findViewById(R.id.profilePicture)
         username = view.findViewById(R.id.settings_username)
         profession = view.findViewById(R.id.settings_profession)
         updateButton = view.findViewById(R.id.updateButton)
         signOutButton = view.findViewById(R.id.signOutButton)
+        testConversations = view.findViewById(R.id.testConversationsButton)
 
         val auth = Firebase.auth
         user = auth.currentUser!!
@@ -81,6 +89,11 @@ class SettingsFragment : Fragment() {
 
         signOutButton.setOnClickListener {
             logOut(auth)
+        }
+
+        //TODO remove this button after search is done, for testing purposes only
+        testConversations.setOnClickListener{
+            addConversationForTest()
         }
 
     }
@@ -120,6 +133,23 @@ class SettingsFragment : Fragment() {
         val ref = database.getReference("UserDataList").child(user.uid)
         ref.child("profession").setValue(profession.text.toString())
         Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun addConversationForTest() {
+
+        val database = FirebaseDatabase.getInstance("https://messagingappandroid-default-rtdb.europe-west1.firebasedatabase.app/")
+        val ref = database.getReference("UserDataList").child(user.uid)
+
+        val message1 = a.kentchuashvili.messagingapp.model.Message("hi", "ana", "rameei", LocalDateTime.now().toString())
+        val message2 = a.kentchuashvili.messagingapp.model.Message("hello", "ana", "rameei", LocalDateTime.now().toString())
+        val lst = listOf<a.kentchuashvili.messagingapp.model.Message>(message1, message2)
+        val map = mutableMapOf<String, List<a.kentchuashvili.messagingapp.model.Message>>()
+        map["rameei"] = lst
+        map["ana"] = lst
+
+        ref.child("conversation").setValue(map)
+        Toast.makeText(context, "added conversations", Toast.LENGTH_LONG).show()
     }
 
     private fun logOut(auth: FirebaseAuth) {
