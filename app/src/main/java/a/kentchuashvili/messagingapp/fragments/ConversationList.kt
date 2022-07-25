@@ -4,7 +4,7 @@ import a.kentchuashvili.messagingapp.R
 import a.kentchuashvili.messagingapp.adapters.ConversationListAdapter
 import a.kentchuashvili.messagingapp.model.ConversationListItem
 import a.kentchuashvili.messagingapp.model.Message
-import a.kentchuashvili.messagingapp.model.UserAdditionalData
+import a.kentchuashvili.messagingapp.model.UserData
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -28,9 +28,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.time.Duration
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.*
 
 
 class ConversationList : Fragment() {
@@ -75,7 +73,7 @@ class ConversationList : Fragment() {
         ref.get().addOnCompleteListener {
             if (it.isSuccessful) {
                 val res: DataSnapshot? = it.result
-                val userData = res!!.getValue(UserAdditionalData::class.java)
+                val userData = res!!.getValue(UserData::class.java)
                 render(userData!!)
             }
         }
@@ -83,7 +81,7 @@ class ConversationList : Fragment() {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun render(userData: UserAdditionalData) {
+    private fun render(userData: UserData) {
         val conversationMap = userData.conversation ?: HashMap<String, List<Message>>()
         val conversationsList = mutableListOf<ConversationListItem>()
         fullList = mutableListOf()
@@ -113,7 +111,7 @@ class ConversationList : Fragment() {
         ref.addValueEventListener(object : ValueEventListener {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val value = dataSnapshot.getValue(UserAdditionalData::class.java)
+                val value = dataSnapshot.getValue(UserData::class.java)
                 render(value!!)
             }
 
@@ -131,7 +129,7 @@ class ConversationList : Fragment() {
 
         filteredList = mutableListOf()
         for (i in fullList) {
-            if (keyWord in i.username) {
+            if (i.username!!.contains(keyWord, ignoreCase = true)) {
                 filteredList.add(i)
             }
         }

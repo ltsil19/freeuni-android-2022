@@ -1,6 +1,6 @@
 package a.kentchuashvili.messagingapp
 
-import a.kentchuashvili.messagingapp.model.UserAdditionalData
+import a.kentchuashvili.messagingapp.model.UserData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,13 +18,13 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var nickname: EditText
-    lateinit var password: EditText
-    lateinit var profession: EditText
-    lateinit var signIn: Button
-    lateinit var loginPageSignUp: Button
-    lateinit var registerPageSignUp: Button
-    lateinit var unregistered: TextView
+    private lateinit var nickname: EditText
+    private lateinit var password: EditText
+    private lateinit var profession: EditText
+    private lateinit var signIn: Button
+    private lateinit var loginPageSignUp: Button
+    private lateinit var registerPageSignUp: Button
+    private lateinit var unregistered: TextView
 
     private lateinit var auth: FirebaseAuth
 
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun login() {
         val userName = nickname.text.toString()
         val email = "$userName@test.com"
-        val password = password.text.toString();
+        val password = password.text.toString()
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this)
         { task ->
             if (task.isSuccessful) {
@@ -92,21 +92,21 @@ class MainActivity : AppCompatActivity() {
         val userName = nickname.text.toString()
         val email = "$userName@test.com"
         Log.i("debug", email)
-        val password = password.text.toString();
+        val password = password.text.toString()
         val profession = profession.text.toString()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    var user = auth.currentUser
+                    val user = auth.currentUser
                     val database = FirebaseDatabase.getInstance()
                     val newUserReference = database.getReference("UserDataList")
                     val profileUpdates = userProfileChangeRequest {
                         displayName = userName
                     }
                     user!!.updateProfile(profileUpdates)
-                    newUserReference.child(user!!.uid)
-                        .setValue(UserAdditionalData(profession, emptyMap()))
+                    newUserReference.child(user.uid)
+                        .setValue(UserData(user.uid, userName, profession, emptyMap()))
                     val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
 

@@ -13,14 +13,26 @@
         <action
             android:id="@+id/conversationList_to_settings"
             app:destination="@id/settings" />
+        <action
+            android:id="@+id/conversationList_to_search"
+            app:destination="@+id/search" />
     </fragment>
     <fragment
         android:id="@+id/settings"
         android:name="a.kentchuashvili.messagingapp.fragments.SettingsFragment"
-        tools:layout="@layout/fragment_settings"
-        android:label="settings">
+        android:label="settings"
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_createAlarmFragment_to_alarmsListFragment"
+            app:popUpTo="@id/conversationList" />
+    </fragment>
+    <fragment
+        android:id="@+id/search"
+        android:name="a.kentchuashvili.messagingapp.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_conversationList"
             app:popUpTo="@id/conversationList" />
     </fragment>
 </navigation>
