@@ -6,5 +6,5 @@ data class ConversationListItem(
     val username: String,
     val lastMessage: String,
     val timestamp: String,
-    val picture: Bitmap
+    var picture: Bitmap?
 )

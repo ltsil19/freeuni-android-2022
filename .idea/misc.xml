@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/drawable/ic_baseline_arrow_back.xml" value="0.288" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3415" />
+        <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/activity_chat.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/activity_home_page.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/activity_main.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/conversation_list_item.xml" value="0.1762917933130699" />
@@ -11,6 +13,8 @@
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/fragment_conversation_list.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/fragment_settings.xml" value="0.3432971014492754" />
+        <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/message_item.xml" value="0.3432971014492754" />
+        <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/message_item_sender.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/layout/search_list_item.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/AzRy/AndroidStudioProjects/freeuni-android-2022/app/src/main/res/menu/menu.xml" value="0.3625" />
         <entry key="..\:/Users/AzRy/Homework/Android/freeuni-android-2022/app/src/main/res/drawable/et_background.xml" value="0.18055555555555555" />

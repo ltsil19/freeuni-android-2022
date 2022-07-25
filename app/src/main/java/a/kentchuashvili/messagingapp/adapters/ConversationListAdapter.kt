@@ -1,19 +1,21 @@
 package a.kentchuashvili.messagingapp.adapters
 
+import a.kentchuashvili.messagingapp.ChatActivity
 import a.kentchuashvili.messagingapp.R
 import a.kentchuashvili.messagingapp.model.ConversationListItem
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 
-class ConversationListAdapter(var conversationList: List<ConversationListItem>):
+class ConversationListAdapter(var conversationList: List<ConversationListItem>) :
     RecyclerView.Adapter<ConversationListAdapter.ConversationListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationListViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.conversation_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.conversation_list_item, parent, false)
         return ConversationListViewHolder(view)
     }
 
@@ -26,14 +28,14 @@ class ConversationListAdapter(var conversationList: List<ConversationListItem>):
         return conversationList.size
     }
 
+    inner class ConversationListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val profilePicture =
+            itemView.findViewById<ImageView>(R.id.conversationListItemProfilePicture)
+        private val username = itemView.findViewById<TextView>(R.id.conversationListItemUsername)
+        private val message = itemView.findViewById<TextView>(R.id.conversationListItemMessage)
+        private val timestamp = itemView.findViewById<TextView>(R.id.conversationListItemTimestamp)
 
-    inner class ConversationListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val profilePicture = itemView.findViewById<ImageView>(R.id.conversationListItemProfilePicture)
-        val username = itemView.findViewById<TextView>(R.id.conversationListItemUsername)
-        val message = itemView.findViewById<TextView>(R.id.conversationListItemMessage)
-        val timestamp = itemView.findViewById<TextView>(R.id.conversationListItemTimestamp)
-
-        fun init(conversationListItem: ConversationListItem){
+        fun init(conversationListItem: ConversationListItem) {
 
             profilePicture.setImageBitmap(conversationListItem.picture)
             username.text = conversationListItem.username
@@ -41,7 +43,9 @@ class ConversationListAdapter(var conversationList: List<ConversationListItem>):
             timestamp.text = conversationListItem.timestamp
 
             itemView.setOnClickListener {
-               //TODO go to chat
+                val intent = Intent(it.context, ChatActivity::class.java)
+                intent.putExtra("username", username.text)
+                it.context.startActivity(intent)
             }
         }
     }

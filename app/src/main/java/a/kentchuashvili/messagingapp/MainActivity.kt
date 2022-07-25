@@ -97,7 +97,6 @@ class MainActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
                     val user = auth.currentUser
                     val database = FirebaseDatabase.getInstance()
                     val newUserReference = database.getReference("UserDataList")
@@ -106,10 +105,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     user!!.updateProfile(profileUpdates)
                     newUserReference.child(user.uid)
-                        .setValue(UserData(user.uid, userName, profession, emptyMap()))
+                        .setValue(UserData(user.uid, userName, profession))
                     val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
-
                 } else {
                     Toast.makeText(
                         baseContext, "Authentication failed.",

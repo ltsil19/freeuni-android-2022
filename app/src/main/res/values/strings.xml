@@ -17,4 +17,5 @@
     <string name="time_placeholder">time placeholder</string>
     <string name="search">search</string>
     <string name="add_demo_conversation">add demo conversation</string>
+    <string name="time_example">12:51</string>
 </resources>

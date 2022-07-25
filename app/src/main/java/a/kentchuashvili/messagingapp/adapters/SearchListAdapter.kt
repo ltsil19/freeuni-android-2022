@@ -1,8 +1,9 @@
 package a.kentchuashvili.messagingapp.adapters
 
+import a.kentchuashvili.messagingapp.ChatActivity
 import a.kentchuashvili.messagingapp.R
 import a.kentchuashvili.messagingapp.model.SearchListItem
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,19 +21,20 @@ class SearchListAdapter(var userList: List<SearchListItem>) :
         private val profession = itemView.findViewById<TextView>(R.id.searchListItemProfession)
 
         fun init(searchListItem: SearchListItem) {
-            Log.i("TEST", searchListItem.toString())
             profilePicture.setImageBitmap(searchListItem.picture)
             username.text = searchListItem.username
             profession.text = searchListItem.profession
 
             itemView.setOnClickListener {
-                //TODO go to chat
+                val intent = Intent(it.context, ChatActivity::class.java)
+                intent.putExtra("username", username.text)
+                it.context.startActivity(intent)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchListViewHolder {
-        var view =
+        val view =
             LayoutInflater.from(parent.context).inflate(R.layout.search_list_item, parent, false)
         return SearchListViewHolder(view)
     }
